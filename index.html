@@ -6,11 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martino's CampoMinato</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2e0cc00556.js" crossorigin="anonymous"></script>
+
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
-    <button id="campoMinato">START</button>
+
+    <header>
+        <a href="">
+            <h1 class="transition">Campo Minato</h1>
+        </a>
+    </header>
+
+    <div class="yellow-separator"></div>
+
+    <main>
+        <section class="start">
+            <button id="campoMinato" class="transition">START</button>
+        </section>
+        
+        <section>
+            <h2 class="green-text"
+                >Numeri Utente 
+                <i class="far fa-laugh-beam"></i>
+            </h2>
+            <ul class="numList green-text" id="numUser">
+
+            </ul>
+        </section>
+
+        <section>
+            <h2 class="rose-text">
+                Numeri Computer <i class="fas fa-bomb"></i>
+            </h2>
+            <ul class="numList rose-text" id="numPC">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+
+    </main>
+
     <script src="js/script.js"></script>
 </body>
 </html>

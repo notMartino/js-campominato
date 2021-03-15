@@ -2,6 +2,7 @@
 function getRandomNumbers (min, max){
     var max = max - min + 1;
     var randomNumbers = [];
+    var listaNumPC = document.getElementById('numPC');
 
     for (let i = 0; i < 16; i++) {
         // Variante con for
@@ -21,8 +22,12 @@ function getRandomNumbers (min, max){
             i--;
         }else{
             randomNumbers[i] = randomNumb; 
+            listaNumPC.children[i].innerHTML += randomNumbers[i];
+            setTimeout (()=> {
+                listaNumPC.children[i].style.opacity = '1';
+            },1000);
         }
-    } 
+    }
 
     // Ritorno i numeri esplosivi
     return randomNumbers;
@@ -69,6 +74,7 @@ function getDifficolta() {
 // Funzione di verifica punti/sconfitta/vittoria
 function pointsCounter(slotTentativi, numeriComputer, max) {
     var numsUtente = [];
+    var listaNumUtente = document.getElementById('numUser');
 
     // Variante verifica con while
     var exit = false;
@@ -93,14 +99,17 @@ function pointsCounter(slotTentativi, numeriComputer, max) {
         // Altrimenti quando abbiamo un inserimento corretto
         else{
             numsUtente[i] = numTemporaneo;
+            listaNumUtente.innerHTML += '<li class="green-text">' + numsUtente[i] + '</li>';
+            listaNumUtente.children[i].style.opacity = '1';
 
             // Verifico se il numero inserito è esplosivo
             if (numeriComputer.includes(numsUtente[i])) {
-                numsUtente.pop();
                 console.log('KABOOOOM!!');
                 console.log('Hai totalizzato: ' + i + ' PUNTI');
                 console.log('Numeri corretti usati: ' + numsUtente);
                 exit = true;
+                listaNumUtente.children[i].className = 'rose-text';
+                listaNumUtente.children[i].innerHTML += ' <i class="fas fa-bomb"></i>';
             }
             // Se arrivo alla fine dei tentativi ho vinto
             else if (i == (slotTentativi - 1)) {
@@ -145,11 +154,22 @@ function pointsCounter(slotTentativi, numeriComputer, max) {
 // -------------------------------------------------------
 // Funzione principale CampoMinato
 function campoMinato() {
-     // Richiamo la funzione scelta difficoltà
-     var arrayDifficolta = getDifficolta();
-     var min = 1;
-     var max = arrayDifficolta[0]; // Range max
-     var slotTentativi = arrayDifficolta[1]; // Num. tentativi
+    var listaNumComputer = document.getElementById('numPC');
+    if(listaNumComputer.children[0].innerHTML != ''){
+        for (let i = 0; i < 16; i++) {
+            listaNumComputer.children[i].innerHTML = '';
+            listaNumComputer.children[i].style.opacity = '0';
+        }
+    }
+
+    var listaNumUser = document.getElementById('numUser');
+    listaNumUser.innerHTML = '';
+    
+    // Richiamo la funzione scelta difficoltà
+    var arrayDifficolta = getDifficolta();
+    var min = 1;
+    var max = arrayDifficolta[0]; // Range max
+    var slotTentativi = arrayDifficolta[1]; // Num. tentativi
 
     // Richiamo la funzione dei num. random
     var numeriComputer = getRandomNumbers(min, max);

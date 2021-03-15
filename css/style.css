@@ -1,10 +1,137 @@
+/* Proprietà generali */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+body{
+    background-color:black;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style-type: none;
+}
+section{
+    padding: 20px 30px;
 }
 
-body{
-    color:chocolate;
+/* Transizione unica */
+.transition{
+    overflow: hidden;
+    color: white;
+    background-color: black;
+    border: 2px solid yellow;
+    box-shadow: 0 0 20px 0 #ff073a;
+    text-shadow: 0 0 5px yellow;
+    transition: transform 0.4s,background-color 0.4s, box-shadow 0.4s, text-shadow 0.4s;
+}
+.transition:hover{
+    transform: scale(1.1);
+    background-color: black;
+    box-shadow: 0 0 20px 10px #ff073a;
+    text-shadow: 0 0 10px yellow;
+}
+
+/* Colori Testo */
+.rose-text{
+    text-shadow: 0 0 10px #ff073a;;
+}
+.green-text {
+    /* color: #4efd54; */
+    text-shadow: 0 0 10px #4efd54;
+}
+
+/* Separatore */
+.yellow-separator{
+    height: 10px;
+    width: 100%;
+    border-left: 5px solid yellow;
+    border-right: 5px solid yellow;
+    border-top: 2px solid yellow;
+    border-bottom: 2px solid yellow;
+    background-color: #ff073a;
+}
+
+/* Proprietà header */
+header{
+    padding: 30px 20px;
     text-align: center;
+    min-height: 170px;
+}
+header h1{
+    /* box-shadow: 0 0 10px 0 red!important; */
+    font-size: 50px;
+    width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+
+header h1:hover{
+    transform: scale(1.03)!important;
+}
+
+/* Sezione start */
+.start{
+    text-align: center;
+    padding-top: 35px;
+}
+
+/* Btn di avvio del gioco*/
+#campoMinato{
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    min-height: 80px;
+    min-width: 200px;
+    cursor: pointer;
+}
+#campoMinato:visited, #campoMinato:focus{
+    outline: none;
+}
+
+/* Lista numeri computer */
+section h2{
+    overflow: hidden;
+    font-size: 30px;
+    margin: 0 0 20px;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    padding: 10px;
+}
+
+.numList{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.numList li{
+    transition: opacity 2s;
+    opacity: 0;
+    margin: 0 20px 10px;
+    font-size: 28px;
+    flex-basis: calc((100% / 8) - 40px);
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    /* text-shadow: 0 0 10px #ff073a, 0 0 10px #0000FF; */
+}
+
+@media all and (max-width: 991px){
+    .numList li{
+        flex-basis: calc((100% / 4) - 40px);
+    }
+}
+@media all and (max-width: 575px){
+    .numList li{
+        flex-basis: calc((100% / 2) - 40px);
+    }
 }
