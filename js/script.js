@@ -23,6 +23,7 @@ function getRandomNumbers (min, max){
         }else{
             randomNumbers[i] = randomNumb; 
             listaNumPC.children[i].innerHTML += randomNumbers[i];
+            listaNumPC.children[i].style.margin = '10px 20px';
             setTimeout (()=> {
                 listaNumPC.children[i].style.opacity = '1';
             },1000);

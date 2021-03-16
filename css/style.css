@@ -8,6 +8,7 @@
 body{
     background-color:black;
     color: white;
+    overflow-x: hidden;
 }
 a{
     text-decoration: none;
@@ -58,8 +59,65 @@ section.less-padd{
     border-top: 2px solid yellow;
     border-bottom: 2px solid yellow;
     background-color: #ff073a;
+    position: relative;
 }
 
+.animation-separator, .animation-separator-blue{
+    position: absolute;
+    z-index: 100;
+    top: -2px;
+    left: -5px;
+    height: 10px;
+    width: 100px;
+    background-color: transparent;
+    animation: radar 5s infinite linear;
+    box-shadow: 0 0 20px 5px #ff073a;
+    background-color: yellow;
+    opacity: 0.1;
+}
+
+.animation-separator-blue{
+    background-color: yellow;
+    box-shadow: 0 0 20px 5px blue;
+    top: -2px;
+    right: -5px;
+    left: auto;
+    animation: radar2 5s infinite linear;
+}
+
+@keyframes radar{
+    25%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.3;
+        left: calc(100% - 95px);
+    }
+    75%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.3;
+        left: -5px;
+    }
+}
+
+@keyframes radar2{
+    25%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.3;
+        right: calc(100% - 95px);
+    }
+    75%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.3;
+        right: -5px;
+    }
+}
 /* Proprietà header */
 header{
     padding: 25px 20px 20px;
@@ -69,7 +127,7 @@ header{
 header h1{
     /* box-shadow: 0 0 10px 0 red!important; */
     font-size: 50px;
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto 20px;
     border-radius: 10px;
     padding: 20px 10px;
@@ -107,7 +165,8 @@ header h1:hover{
     font-size: 20px;
     border-radius: 10px;
     min-height: 80px;
-    min-width: 200px;
+    width: 70%;
+    max-width: 200px;
     cursor: pointer;
     /* cursor: url('../img/bomb.png'), pointer; */
 }
@@ -153,14 +212,30 @@ section h2{
     cursor: default;
 }
 
+#numPC li{
+    margin: 0;
+}
+
 @media all and (max-width: 991px){
     .numList li{
         flex-basis: calc((100% / 4) - 40px);
+    }
+    .animation-separator{
+        animation: radar 3s infinite linear;
+    }
+    .animation-separator-blue{
+        animation: radar2 3s infinite linear;
     }
 }
 @media all and (max-width: 575px){
     .numList li{
         flex-basis: calc((100% / 2) - 40px);
+    }
+    .animation-separator{
+        animation: radar 1.8s infinite linear;
+    }
+    .animation-separator-blue{
+        animation: radar2 1.8s infinite linear;
     }
 }
 
