@@ -22,6 +22,18 @@
         <a href="">
             <h1 class="transition">Campo Minato</h1>
         </a>
+
+        <select name="difficolta" id="difficolta">
+            <option value="1" selected>
+                Easy
+            </option>
+            <option value="2" >
+                Normal
+            </option>
+            <option value="3">
+                Hard
+            </option>
+        </select>
     </header>
 
     <div class="yellow-separator"></div>
@@ -41,9 +53,9 @@
             </ul>
         </section>
 
-        <section>
+        <section class="less-padd">
             <h2 class="rose-text">
-                Computer <i class="fas fa-bomb"></i>
+                Computer <i class="fas fa-robot"></i>
             </h2>
             <ul class="numList rose-text" id="numPC">
                 <li></li>
@@ -65,8 +77,10 @@
             </ul>
         </section>
 
+        <div class="yellow-separator"></div>
+
         <section>
-            <div id="winLosePoints"></div>
+            <div class="transition" id="winLosePoints"></div>
         </section>
     </main>
 

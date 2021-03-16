@@ -45,34 +45,36 @@ function getDifficolta() {
         }
         countError = true;
 
-        difficolta = parseInt(prompt('Scegli la difficoltà (1 / 2 / 3): '));
+        // var difficolta = parseInt(prompt('Scegli la difficoltà (1 / 2 / 3): '));
+        var difficolta = parseInt(document.getElementById('difficolta').value);
     }while(difficolta != 1 && difficolta != 2 && difficolta != 3);
 
-    // Difficoltà 1: default
-    var max = 100;
-    var difficoltaWord = 'Easy';
 
-    // Difficoltà 2: normale
-    if (difficolta == 2) {
-        max = 80;
-        difficoltaWord = 'Normal';
-    }
-    // Difficoltà 3: difficile
-    else if(difficolta == 3){
-        max = 50;
-        difficoltaWord = 'Hard';
+    switch (difficolta) {
+        case 2: // Difficoltà 2: normale
+            max = 80;
+            difficoltaWord = 'Normal';
+            break;
+        case 3: // Difficoltà 3: difficile
+            max = 50;
+            difficoltaWord = 'Hard';
+            break;
+        default: // Difficoltà 1: default
+            var max = 100;
+            var difficoltaWord = 'Easy';
+            break;
     }
 
     console.log('Difficoltà: ' + difficoltaWord  + '(' + difficolta + ')');
     var slotTentativi = max - 16;
 
     // Torno il range e i tentativi a disposizione dell'utente
-    return [max, slotTentativi];
+    return [max, slotTentativi, difficoltaWord];
 }
 
 // -------------------------------------------------------
 // Funzione di verifica punti/sconfitta/vittoria
-function pointsCounter(slotTentativi, numeriComputer, max) {
+function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
     var numsUtente = [];
     var listaNumUtente = document.getElementById('numUser');
     var winLoseScore = document.getElementById('winLosePoints');
@@ -113,12 +115,17 @@ function pointsCounter(slotTentativi, numeriComputer, max) {
                 listaNumUtente.children[i].className = 'rose-text';
                 listaNumUtente.children[i].innerHTML += ' <i class="fas fa-bomb"></i>';
                 winLoseScore.innerHTML += '<h3 class="rose-text">YOU LOSE</h3>';
-                winLoseScore.innerHTML += '<h3 class="green-text">Score: ' + i + ' Pts'; 
+                winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
+                winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
                 winLoseScore.style.opacity = '1';
             }
             // Se arrivo alla fine dei tentativi ho vinto
             else if (i == (slotTentativi - 1)) {
                 console.log('Hai Vinto!! Hai totalizzato: ' + (i + 1) + ' PUNTI');
+                winLoseScore.innerHTML += '<h3 class="green-text">YOU WIN</h3>';
+                winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
+                winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
+                winLoseScore.style.opacity = '1';
             }
         }
         i++;
@@ -175,13 +182,17 @@ function campoMinato() {
     var min = 1;
     var max = arrayDifficolta[0]; // Range max
     var slotTentativi = arrayDifficolta[1]; // Num. tentativi
+    var difficoltaWord = arrayDifficolta[2]; // Difficolta partita
 
     // Richiamo la funzione dei num. random
     var numeriComputer = getRandomNumbers(min, max);
     console.log('Numeri Computer: ' + numeriComputer);
 
     // Richiamo la funzione di inserimento numeri utente e verifica points/win/lose
-    pointsCounter(slotTentativi, numeriComputer, max);
+    pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord);
+
+    // window.scrollBy(0, 200);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
 }
 
 // Avvio il gioco quando premo il pulsante START
