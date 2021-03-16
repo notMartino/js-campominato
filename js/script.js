@@ -20,14 +20,10 @@ function getRandomNumbers (min, max){
         var randomNumb = Math.floor(Math.random() * max) + min;
         if (randomNumbers.includes(randomNumb)) {
             i--;
-        }else{
-            randomNumbers[i] = randomNumb; 
-            listaNumPC.children[i].innerHTML += randomNumbers[i];
-            // listaNumPC.children[i].style.margin = '10px 20px';
-            // setTimeout (()=> {
-            //     listaNumPC.children[i].style.opacity = '1';
-            // },1000);
+            continue;
         }
+        randomNumbers[i] = randomNumb; 
+        listaNumPC.children[i].innerHTML += randomNumbers[i];
     }
 
     // Ritorno i numeri esplosivi
@@ -69,7 +65,7 @@ function getDifficolta() {
     console.log('Difficoltà: ' + difficoltaWord  + '(' + difficolta + ')');
     var slotTentativi = max - 16;
 
-    // Torno il range e i tentativi a disposizione dell'utente
+    // Torno il range, i tentativi a disposizione dell'utente, e la parola associata alla difficoltà
     return [max, slotTentativi, difficoltaWord];
 }
 
@@ -77,93 +73,112 @@ function getDifficolta() {
 // Funzione di verifica punti/sconfitta/vittoria
 function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
 
+    // Array che conterrà i numeri User
     var numsUtente = [];
+    // Lista ul li (che mi farà vedere i numeri in pagina)
     var listaNumUtente = document.getElementById('numUser');
+    // Div che mi farà vedere WIN/LOSE e PTS
     var winLoseScore = document.getElementById('winLosePoints');
-    
     winLoseScore.innerHTML = '';
     
     // Variante verifica con while
-    var exit = false;
+    // var exit = false;
+    
     var i = 0;
-
 
     var btnCalcola = document.getElementById('calcola');
     var continuaInserimento = true;
 
-        // while (i < slotTentativi && !exit) {
-            
-                btnCalcola.addEventListener('click', function () {
-                    if (continuaInserimento) {
-                        var inputNumUtente = parseInt(document.getElementById('numeroUtente').value);
-                        console.log(inputNumUtente);
-                        // var numTemporaneo = parseInt(prompt('Inserisci un numero da 1 a ' + max+ ': '));
-                        var numTemporaneo = inputNumUtente;
-                        console.log('Hai inserito: ' + numTemporaneo);
-        
-                        // Verifico che il numero inserito non sia già stato inserito
-                        if (numsUtente.includes(numTemporaneo)) {
-                            // console.log('Errore! Hai già inseito questo numero: ' +  numTemporaneo);
-                            alert('Errore! Hai già inserito questo numero: ' +  numTemporaneo);
-                            inputNumUtente.value = '';
-                            i--;
-                        }
-                        // Verifico che il numero inserito non sià fuori range, oppure non sia un numero
-                        else if (numTemporaneo > max || numTemporaneo < 1 || isNaN(numTemporaneo) ) {
-                            console.log('Errore: inserisci un numero (da 1 a ' + max + ')!');
-                            alert('Errore: inserisci un numero (da 1 a ' + max + ')!');
-                            i--;
-                            inputNumUtente.value = '';
-                        }
-                        // Altrimenti quando abbiamo un inserimento corretto
-                        else{
-                            numsUtente[i] = numTemporaneo;
-                            listaNumUtente.innerHTML += '<li class="green-text">' + numsUtente[i] + '</li>';
-                            listaNumUtente.children[i].style.opacity = '1';
-                            inputNumUtente = '';
-        
-                            // Verifico se il numero inserito è esplosivo
-                            if (numeriComputer.includes(numsUtente[i])) {
-                                console.log('KABOOOOM!!');
-                                console.log('Hai totalizzato: ' + i + ' PUNTI');
-                                console.log('Numeri corretti usati: ' + numsUtente);
-                                exit = true;
-                                listaNumUtente.children[i].className = 'rose-text';
-                                listaNumUtente.children[i].innerHTML += ' <i class="fas fa-bomb"></i>';
-                                winLoseScore.innerHTML += '<h3 class="rose-text">YOU LOSE</h3>';
-                                winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
-                                winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
-                                winLoseScore.style.opacity = '1';
-                                var listaNumPC = document.getElementById('numPC');
-                                listaNumPC.style.visibility ="visible";
-                                for (let i = 0; i < 16; i++) {
-                                    listaNumPC.children[i].style.opacity = '1';
-                                    listaNumPC.children[i].style.margin = '10px 20px';
-                                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                                }
-                                continuaInserimento = false;
-                            }
-                            // Se arrivo alla fine dei tentativi ho vinto
-                            else if (i == (slotTentativi - 1)) {
-                                console.log('Hai Vinto!! Hai totalizzato: ' + (i + 1) + ' PUNTI');
-                                winLoseScore.innerHTML += '<h3 class="green-text">YOU WIN</h3>';
-                                winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
-                                winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
-                                winLoseScore.style.opacity = '1';
-                                for (let i = 0; i < 16; i++) {
-                                    listaNumPC.children[i].style.opacity = '1';
-                                    listaNumPC.children[i].style.margin = '10px 20px';
-                                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                                }
-                                continuaInserimento = false;
-                            }
-                        }
-                    }
-                    i++;
-                });
-        // }
-    
+    // Usiamo il listener al posto del while
+    // while (i < slotTentativi && !exit) {
+    btnCalcola.addEventListener('click', function () {
 
+        // Var booleana che diventa falsa quando esco (WIN/LOSE) e finche non ho ripremuto start
+        if (continuaInserimento) {
+            // Valore all'interno di input text
+            var inputNumUtente = parseInt(document.getElementById('numeroUtente').value);
+
+            // Passo il valore ad un'altra var
+            var numTemporaneo = inputNumUtente;
+            console.log('Hai inserito: ' + numTemporaneo);
+
+            // Verifico che il numero inserito non sia già stato inserito
+            if (numsUtente.includes(numTemporaneo)) {
+                console.log('Errore! Hai già inseito questo numero: ' +  numTemporaneo);
+                alert('Errore! Hai già inserito questo numero: ' +  numTemporaneo);
+
+                // Pulisco il valore di input text
+                inputNumUtente.value = '';
+                i--;
+            }
+            // Verifico che il numero inserito non sià fuori range, oppure non sia un numero
+            else if (numTemporaneo > max || numTemporaneo < 1 || isNaN(numTemporaneo) ) {
+                console.log('Errore: inserisci un numero (da 1 a ' + max + ')!');
+                alert('Errore: inserisci un numero (da 1 a ' + max + ')!');
+
+                // Pulisco il valore di input text
+                inputNumUtente.value = '';
+                i--;
+            }
+            // Altrimenti quando abbiamo un inserimento corretto
+            else{
+                numsUtente[i] = numTemporaneo;
+                // Inserisco il valore in lista html
+                listaNumUtente.innerHTML += '<li class="green-text">' + numsUtente[i] + '</li>';
+                // Lo faccio vedere
+                listaNumUtente.children[i].style.opacity = '1';
+                // Pulisco il valore di input text 
+                inputNumUtente = '';
+
+                // Verifico se il numero inserito è esplosivo
+                if (numeriComputer.includes(numsUtente[i])) {
+                    console.log('KABOOOOM!!');
+                    console.log('Hai totalizzato: ' + i + ' PUNTI');
+                    console.log('Numeri corretti usati: ' + numsUtente);
+                    // exit = true; (con while)
+
+                    // Cambio la classe dell'ultimo perchè so che è quello errato e aggiungo la bombetta
+                    listaNumUtente.children[i].className = 'rose-text';
+                    listaNumUtente.children[i].innerHTML += ' <i class="fas fa-bomb"></i>';
+
+                    // Inserisco nel div WIN/LOSE, PTS e Difficoltà
+                    winLoseScore.innerHTML += '<h3 class="rose-text">YOU LOSE</h3>';
+                    winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
+                    winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
+                    winLoseScore.style.opacity = '1';
+
+                    // Rendo visibile la lista dei numeri Computer
+                    var listaNumPC = document.getElementById('numPC');
+                    listaNumPC.style.visibility ="visible";
+                    for (let i = 0; i < 16; i++) {
+                        listaNumPC.children[i].style.opacity = '1';
+                        listaNumPC.children[i].style.margin = '10px 20px';
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                    }
+                    continuaInserimento = false;
+                }
+                // Se arrivo alla fine dei tentativi ho vinto
+                else if (i == (slotTentativi - 1)) {
+                    console.log('Hai Vinto!! Hai totalizzato: ' + (i + 1) + ' PUNTI');
+
+                    // Inserisco nel div WIN/LOSE, PTS e Difficoltà
+                    winLoseScore.innerHTML += '<h3 class="green-text">YOU WIN</h3>';
+                    winLoseScore.innerHTML += '<h5>Score: ' + i + ' Pts</h5>'; 
+                    winLoseScore.innerHTML += '<h5>Mode: ' + difficoltaWord + '</h5>'; 
+                    winLoseScore.style.opacity = '1';
+                    for (let i = 0; i < 16; i++) {
+                        listaNumPC.children[i].style.opacity = '1';
+                        listaNumPC.children[i].style.margin = '10px 20px';
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                    }
+                    continuaInserimento = false;
+                }
+            }
+        }
+        i++;
+    });
+    // }
+    
     // Variante verifica con for
     // for (let i = 0; i < slotTentativi; i++) {
     //     var numTemporaneo = parseInt(prompt('Inserisci un numero da 1 a ' + max+ ': '));
@@ -199,6 +214,7 @@ function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
 // -------------------------------------------------------
 // Funzione principale CampoMinato
 function campoMinato() {
+    // Pulizia elementi in lista numeri PC e li rendo invisibili
     var listaNumComputer = document.getElementById('numPC');
     if(listaNumComputer.children[0].innerHTML != ''){
         for (let i = 0; i < 16; i++) {
@@ -207,12 +223,13 @@ function campoMinato() {
         }
     }
 
+    // Pulizia elementi in lista numeri User
     var listaNumUser = document.getElementById('numUser');
     listaNumUser.innerHTML = '';
     
-    // Richiamo la funzione scelta difficoltà
+    // Richiamo la funzione scelta difficoltà che mi ritorna array
     var arrayDifficolta = getDifficolta();
-    var min = 1;
+    var min = 1; // Range min
     var max = arrayDifficolta[0]; // Range max
     var slotTentativi = arrayDifficolta[1]; // Num. tentativi
     var difficoltaWord = arrayDifficolta[2]; // Difficolta partita

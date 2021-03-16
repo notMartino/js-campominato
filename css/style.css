@@ -19,9 +19,17 @@ ul{
 section{
     padding: 20px 30px;
 }
-
 section.less-padd{
     padding: 5px 30px 20px;
+}
+
+/* Colori Testo */
+.rose-text{
+    text-shadow: 0 0 10px #ff073a;
+}
+.green-text {
+    /* color: #4efd54; */
+    text-shadow: 0 0 10px #4efd54;
 }
 
 /* Transizione unica */
@@ -40,16 +48,7 @@ section.less-padd{
     box-shadow: 0 0 20px 10px #ff073a;
     text-shadow: 0 0 10px yellow;
 }
-
-/* Colori Testo */
-.rose-text{
-    text-shadow: 0 0 10px #ff073a;
-}
-.green-text {
-    /* color: #4efd54; */
-    text-shadow: 0 0 10px #4efd54;
-}
-    
+   
 /* Separatore */
 .yellow-separator{
     height: 10px;
@@ -62,6 +61,7 @@ section.less-padd{
     position: relative;
 }
 
+/* Animazione sul separatore */
 .animation-separator, .animation-separator-blue{
     position: absolute;
     z-index: 100;
@@ -75,16 +75,6 @@ section.less-padd{
     background-color: yellow;
     opacity: 0.1;
 }
-
-.animation-separator-blue{
-    background-color: yellow;
-    box-shadow: 0 0 20px 5px blue;
-    top: -2px;
-    right: -5px;
-    left: auto;
-    animation: radar2 5s infinite linear;
-}
-
 @keyframes radar{
     25%{
         opacity: 1;
@@ -102,6 +92,15 @@ section.less-padd{
     }
 }
 
+/* Animazione alternativa separatore */
+.animation-separator-blue{
+    background-color: yellow;
+    box-shadow: 0 0 20px 5px blue;
+    top: -2px;
+    right: -5px;
+    left: auto;
+    animation: radar2 5s infinite linear;
+}
 @keyframes radar2{
     25%{
         opacity: 1;
@@ -118,21 +117,21 @@ section.less-padd{
         right: -5px;
     }
 }
+
 /* Proprietà header */
 header{
     padding: 25px 20px 20px;
     text-align: center;
     min-height: 170px;
 }
+/* Titolo */
 header h1{
-    /* box-shadow: 0 0 10px 0 red!important; */
     font-size: 50px;
     max-width: 500px;
     margin: 0 auto 20px;
     border-radius: 10px;
     padding: 20px 10px;
 }
-
 header h1:hover{
     transform: scale(1.03)!important;
 }
@@ -148,17 +147,17 @@ header h1:hover{
     text-shadow: 0 0 5px yellow;
     padding: 2px;
 }
-
+/* Opzioni select */
 #difficolta option{
     color: black;
 }
 
-/* Sezione start */
+/* Proprietà main */
+/* Sezione iniziale */
 .start{
     text-align: center;
     padding-top: 35px;
 }
-
 /* Btn di avvio del gioco*/
 #campoMinato{
     padding: 5px;
@@ -168,13 +167,12 @@ header h1:hover{
     width: 70%;
     max-width: 200px;
     cursor: pointer;
-    /* cursor: url('../img/bomb.png'), pointer; */
 }
 #campoMinato:visited, #campoMinato:focus{
     outline: none;
 }
 
-/* Lista numeri computer */
+/* Sezione Lista numeri User/Computer */
 section h2{
     overflow: hidden;
     font-size: 30px;
@@ -185,11 +183,12 @@ section h2{
     padding: 10px;
 }
 
+/* Contenitore inputs */
 .number-in{
     text-align: center;
     margin-bottom: 10px;
 }
-
+/* Input numero utente */
 #numeroUtente{
     display: inline-block;
     background-color: black;
@@ -204,7 +203,7 @@ section h2{
 #numeroUtente:active, #numeroUtente:hover, #numeroUtente:focus{
     box-shadow: 0 0 20px 0 #ff073a;
 }
-
+/* Btn di invio del numero in input */
 #calcola{
     margin-left: 10px;
     padding: 3px;
@@ -217,6 +216,7 @@ section h2{
     box-shadow: 0 0 20px 2px #ff073a;
 }
 
+/* Proprietà generiche lista PC/User */
 .numList{
     display: flex;
     justify-content: flex-start;
@@ -224,7 +224,7 @@ section h2{
     margin-left: -20px;
     margin-right: -20px;
 }
-
+/* Elementi della lista */
 .numList li{
     transition: opacity 2s;
     opacity: 0;
@@ -236,7 +236,6 @@ section h2{
     border: 2px solid yellow;
     box-shadow: 0 0 2px 0 #ff073a;
     transition: box-shadow 0.4s, transform 0.4s;
-    /* text-shadow: 0 0 10px #ff073a, 0 0 10px #0000FF; */
 }
 .numList li:hover{
     box-shadow: 0 0 10px 2px #ff073a;
@@ -244,11 +243,12 @@ section h2{
     cursor: default;
 }
 
+/* Proprietà specifiche lista PC */
 #numPC li{
     margin: 0;
-    transition: margin 0.4s, height 0.4s, width 0.4s;
+    transition: margin 0.4s, height 0.4s, width 0.4s, box-shadow 0.4s, transform 0.4s;
 }
-
+/* Cambio disposizione li, velocità animazione ad Ypx  */
 @media all and (max-width: 991px){
     .numList li{
         flex-basis: calc((100% / 4) - 40px);
@@ -272,18 +272,16 @@ section h2{
     }
 }
 
+/* Ultima sezione */
 section:last-child{
     padding: 0 20px;
 }
 
+/* Contenitore WIN/LOSE, Pts e difficoltà partita */
 #winLosePoints{
     cursor: default;
     opacity: 0;
     font-size: 30px;
-    /* position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     max-width: 400px;
     border-radius: 10px;
     padding: 20px;

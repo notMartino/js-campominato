@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martino's CampoMinato</title>
+    <link rel="icon" type="image/png" href="img/smile.png"/>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -13,13 +14,13 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/2e0cc00556.js" crossorigin="anonymous"></script>
 
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+    <!-- Header con bottone di 'reset' e selezione difficoltà -->
     <header>
-        <a href="">
+        <a href="index.html">
             <h1 class="transition">Campo Minato</h1>
         </a>
 
@@ -36,16 +37,19 @@
         </select>
     </header>
 
+    <!-- Separatore con animazione -->
     <div class="yellow-separator">
         <div class="animation-separator-blue"></div>
         <div class="animation-separator"></div>
     </div>
 
     <main>
+        <!-- Sezione con bottone START -->
         <section class="start">
             <button id="campoMinato" class="transition">START</button>
         </section>
         
+        <!-- Sezione con input numeri e lista di essi -->
         <section>
             <h2 class="green-text">
                 Player 1 
@@ -57,11 +61,12 @@
                 <button id="calcola" class="transition">Invia</button>
             </div>
             
-
+            <!-- Lista che contiene i numeri inseriti dall'Utente -->
             <ul class="numList green-text" id="numUser">
             </ul>
         </section>
 
+        <!-- Sezione lista numeri PC -->
         <section class="less-padd">
             <h2 class="rose-text">
                 Computer <i class="fas fa-robot"></i>
@@ -86,11 +91,13 @@
             </ul>
         </section>
 
+        <!-- Separatore -->
         <div class="yellow-separator">
             <div class="animation-separator-blue"></div>
             <div class="animation-separator"></div>
         </div>
 
+        <!-- Finestra WIN/LOSE, Pts, difficoltà partita -->
         <section>
             <div class="transition" id="winLosePoints"></div>
         </section>
