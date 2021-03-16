@@ -75,7 +75,9 @@ function getDifficolta() {
 function pointsCounter(slotTentativi, numeriComputer, max) {
     var numsUtente = [];
     var listaNumUtente = document.getElementById('numUser');
+    var winLoseScore = document.getElementById('winLosePoints');
 
+    winLoseScore.innerHTML = '';
     // Variante verifica con while
     var exit = false;
     var i = 0;
@@ -110,6 +112,9 @@ function pointsCounter(slotTentativi, numeriComputer, max) {
                 exit = true;
                 listaNumUtente.children[i].className = 'rose-text';
                 listaNumUtente.children[i].innerHTML += ' <i class="fas fa-bomb"></i>';
+                winLoseScore.innerHTML += '<h3 class="rose-text">YOU LOSE</h3>';
+                winLoseScore.innerHTML += '<h3 class="green-text">Score: ' + i + ' Pts'; 
+                winLoseScore.style.opacity = '1';
             }
             // Se arrivo alla fine dei tentativi ho vinto
             else if (i == (slotTentativi - 1)) {

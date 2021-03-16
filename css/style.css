@@ -38,13 +38,13 @@ section{
 
 /* Colori Testo */
 .rose-text{
-    text-shadow: 0 0 10px #ff073a;;
+    text-shadow: 0 0 10px #ff073a;
 }
 .green-text {
     /* color: #4efd54; */
     text-shadow: 0 0 10px #4efd54;
 }
-
+    
 /* Separatore */
 .yellow-separator{
     height: 10px;
@@ -89,6 +89,7 @@ header h1:hover{
     min-height: 80px;
     min-width: 200px;
     cursor: pointer;
+    /* cursor: url('../img/bomb.png'), pointer; */
 }
 #campoMinato:visited, #campoMinato:focus{
     outline: none;
@@ -116,13 +117,20 @@ section h2{
 .numList li{
     transition: opacity 2s;
     opacity: 0;
-    margin: 0 20px 10px;
+    margin: 10px 20px;
     font-size: 28px;
     flex-basis: calc((100% / 8) - 40px);
     text-align: center;
     border-radius: 10px;
     border: 2px solid yellow;
+    box-shadow: 0 0 2px 0 #ff073a;
+    transition: box-shadow 0.4s, transform 0.4s;
     /* text-shadow: 0 0 10px #ff073a, 0 0 10px #0000FF; */
+}
+.numList li:hover{
+    box-shadow: 0 0 10px 2px #ff073a;
+    transform: scale(1.1);
+    cursor: default;
 }
 
 @media all and (max-width: 991px){
@@ -134,4 +142,24 @@ section h2{
     .numList li{
         flex-basis: calc((100% / 2) - 40px);
     }
+}
+
+section:last-child{
+    padding: 0;
+}
+
+#winLosePoints{
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 30px;
+    /* position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    max-width: 400px;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
 }
