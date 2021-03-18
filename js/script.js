@@ -73,18 +73,17 @@ function getDifficolta() {
 // Funzione di verifica punti/sconfitta/vittoria
 function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
 
-    // Array che conterrà i numeri User
-    var numsUtente = [];
     // Lista ul li (che mi farà vedere i numeri in pagina)
     var listaNumUtente = document.getElementById('numUser');
     // Div che mi farà vedere WIN/LOSE e PTS
     var winLoseScore = document.getElementById('winLosePoints');
     winLoseScore.innerHTML = '';
+    winLoseScore.style.opacity = '0';
     
     // Variante verifica con while
     // var exit = false;
     
-    var i = 0;
+    // var i = 0;
 
     var btnCalcola = document.getElementById('calcola');
     var continuaInserimento = true;
@@ -105,10 +104,11 @@ function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
             // Verifico che il numero inserito non sia già stato inserito
             if (numsUtente.includes(numTemporaneo)) {
                 console.log('Errore! Hai già inseito questo numero: ' +  numTemporaneo);
-                alert('Errore! Hai già inserito questo numero: ' +  numTemporaneo);
+              //  alert('Errore! Hai già inserito questo numero: ' +  numTemporaneo);
 
                 // Pulisco il valore di input text
-                inputNumUtente.value = '';
+                inputNumUtente = 'none';
+                console.log(inputNumUtente);
                 i--;
             }
             // Verifico che il numero inserito non sià fuori range, oppure non sia un numero
@@ -177,6 +177,7 @@ function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
         }
         i++;
     });
+    
     // }
     
     // Variante verifica con for
@@ -214,6 +215,8 @@ function pointsCounter(slotTentativi, numeriComputer, max, difficoltaWord) {
 // -------------------------------------------------------
 // Funzione principale CampoMinato
 function campoMinato() {
+    numsUtente = [];
+    i = 0;
     // Pulizia elementi in lista numeri PC e li rendo invisibili
     var listaNumComputer = document.getElementById('numPC');
     if(listaNumComputer.children[0].innerHTML != ''){
@@ -245,6 +248,9 @@ function campoMinato() {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
+// Array che conterrà i numeri User
+var numsUtente;
+var i;
 // Avvio il gioco quando premo il pulsante START
 var btnStart = document.getElementById('campoMinato');
 btnStart.addEventListener('click', campoMinato);
